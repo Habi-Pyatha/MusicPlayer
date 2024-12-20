@@ -18,6 +18,7 @@ function Home() {
                 <Route path="/trending" element={<Trending/>} />
                 <Route path="/player" element={<Player/>} />
                 <Route path="/favorites" element={<Favorites/>} />
+                <Route path="/library" element={<Library/>} />
             </Routes>
             </div>
         </Router>

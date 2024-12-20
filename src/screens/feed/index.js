@@ -2,7 +2,7 @@ import React from 'react'
 
 function Feed() {
     return (
-        <div>
+        <div className='screen-container'>
             Feed
         </div>
     )
