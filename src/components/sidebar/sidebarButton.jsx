@@ -5,7 +5,7 @@ import { IconContext } from 'react-icons'
 function SidebarButton(props) {
     const location = useLocation();
     const isActive = location.pathname === props.to;
-    console.log(isActive,props.to,location.pathname)
+    // console.log(isActive,props.to,location.pathname)
     
     const btnClass =  isActive ? "btn-body active" : "btn-body";
     return (

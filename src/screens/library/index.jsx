@@ -11,7 +11,7 @@ function Library() {
         APIKit.get('me/playlists').then(function(response) {
             setPlaylists(response.data.items);
             
-            console.log("test",response.data.items);
+            // console.log("test",response.data.items);
         })
     },[]);
     const navigate = useNavigate();

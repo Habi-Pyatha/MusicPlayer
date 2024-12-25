@@ -11,27 +11,71 @@ import Login from "../auth/login";
 import { setClientToken } from "../../spotify";
 function Home() {
   const [token, setToken ] = useState("");
+  const TOKEN_EXPIRATION_TIME = 3600 * 10000;
+  // useEffect(() => {
+  //   const token = window.localStorage.getItem("token");
+  //   const hash = window.location.hash;
+  //   window.location.hash= "";
+  //   if(!token && hash) {
+
+  //       const _token = hash.split("&")[0].split("=")[1];
+  //       const expirationTime = Date.now() + TOKEN_EXPIRATION_TIME;
+  //       window.localStorage.setItem("token", _token);
+  //       window.localStorage.setItem("expirationTime", expirationTime);
+  //       setToken(_token);
+  //       setClientToken(_token);
+  //   }else if(token){
+  //     const expirationTime = parseInt(window.localStorage.getItem("expirationTime"));
+  //     if(Date.now() > expirationTime) {
+  //       window.localStorage.removeItem("token");
+  //       window.localStorage.removeItem("expirationTime");
+  //       setToken(null);
+  //       setClientToken(null);
+  //       // console.log("Token expired");
+       
+  //     }else{
+  //         setToken(token);
+  //         setClientToken(token);
+  //     }
+
+  //       // setToken(token);
+  //       // setClientToken(token);
+
+  //   }
+
+  //   // if (localStorage.getItem("token")) {
+  //   //     setToken(localStorage.getItem("token"));
+  //   // }
+  // }, []);
   useEffect(() => {
-    const token = window.localStorage.getItem("token");
+    const savedToken = window.localStorage.getItem("token");
     const hash = window.location.hash;
-    window.location.hash= "";
-    if(!token && hash) {
-
-        const _token = hash.split("&")[0].split("=")[1];
-        window.localStorage.setItem("token", _token);
-        setToken(_token);
-        setClientToken(_token);
-    }else{
-        setToken(token);
-        setClientToken(token);
-
+    window.location.hash = "";
+  
+    if (!savedToken && hash) {
+      const _token = hash.split("&")[0].split("=")[1];
+      const expirationTime = Date.now() + TOKEN_EXPIRATION_TIME;
+  
+      window.localStorage.setItem("token", _token);
+      window.localStorage.setItem("tokenExpiration", expirationTime);
+  
+      setToken(_token);
+      setClientToken(_token);
+    } else if (savedToken) {
+      const expirationTime = window.localStorage.getItem("tokenExpiration");
+  
+      if (Date.now() > expirationTime) {
+        // Token expired
+        window.localStorage.removeItem("token");
+        window.localStorage.removeItem("tokenExpiration");
+        setToken(null); // Avoid infinite renders
+      } else {
+        setToken(savedToken);
+        setClientToken(savedToken);
+      }
     }
-
-    // if (localStorage.getItem("token")) {
-    //     setToken(localStorage.getItem("token"));
-    // }
-  }, []);
-
+  }, []); // Empty dependency array ensures this runs only once
+  
   return !token ?(
     <Login /> ) :
     (
@@ -54,3 +98,6 @@ function Home() {
 }
 
 export default Home;
+
+
+

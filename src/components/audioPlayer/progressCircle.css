@@ -1,0 +1,41 @@
+circle{
+    transition: all 1s ease-in-out;
+    transform: rotate(93deg);
+    transform-origin: 50% 50%;
+}
+
+image.active{
+    animation: rotation 30s infinite linear;
+    transform-origin: 50% 50%;   
+}
+.progress-circle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    
+}
+
+@keyframes rotation{
+    from {
+        transform: rotate(0deg);
+
+    }
+    to {
+        transform: rotate(359deg);
+    }
+}
+
+
+
+@media (max-width: 768px) {
+    .progress-circle {
+        max-width: 200px; /* Smaller size for tablets */
+    }
+}
+
+@media (max-width: 480px) {
+    .progress-circle {
+        max-width: 150px; /* Even smaller for mobile */
+    }
+}
