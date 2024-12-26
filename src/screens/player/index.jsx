@@ -7,7 +7,7 @@ import Queue from "../../components/queue";
 import AudioPlayer from "../../components/audioPlayer";
 function Player() {
   const location = useLocation();
-  // console.log(location);
+  console.log(location);
   const [tracks, setTracks] = useState([]);
   const [currentTrack, setCurrentTrack] = useState({});
   const [currentIndex, setCurrentIndex] = useState(0);

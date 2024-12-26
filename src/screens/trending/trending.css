@@ -1,0 +1,48 @@
+.song-lists{
+    background-color: black;
+    color: white;
+    padding: 5px;
+    height: 50vh;
+    overflow-y: auto;
+    font-size: 16px;
+
+}
+.song-title{
+   color:#8aa4d4;
+   background-color: rgb(49, 41, 41);
+}
+.song-name{
+    cursor: pointer;
+    padding: 5px;
+    font-size: 18px;
+}
+.audio-player{
+    display: flex;
+    position: fixed ;
+    bottom: 2px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap:3px;
+}
+
+.div-container{
+    display: flex;
+    flex-direction: column;
+}
+button{
+    background-color: #8aa4d4;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    font-size: 17px;
+    width:90px;
+    height: 40px;
+    
+}
+
+button:hover{
+    background-color: #6588b8;
+}
