@@ -13,11 +13,14 @@ export default function AudioPlayer({
   const [isPlaying, setIsPlaying] = useState(false);
   const [trackProgress, setTrackProgress] = useState(0);
 
+  // var audioSrc ="Akon.mp3";
+  // const audioRef = new Audio("Akon.mp3");
   var audioSrc ="https://p.scdn.co/mp3-preview/b51d0ed637d2e5cb3eb27565cce9a06f95599077";
   const audioRef = useRef(new Audio("https://p.scdn.co/mp3-preview/b51d0ed637d2e5cb3eb27565cce9a06f95599077"));
   // console.log("audioSRc", total);
 
-
+// console.log("navi",currentTrack?.href)
+// console.log("total",total);
   // var audioSrc = total[currentIndex]?.track?.preview_url;
   // const audioRef = useRef(new Audio(total[0]?.track?.preview_url));
 
@@ -98,7 +101,7 @@ export default function AudioPlayer({
   };
 
   const handlePrev = () => {
-    if (currentIndex - 1 < 0) setCurrentIndex(currentIndex - 1);
+    if (currentIndex - 1 < 0) setCurrentIndex(total.length - 1);
     else setCurrentIndex(currentIndex - 1);
   };
 
@@ -141,7 +144,9 @@ export default function AudioPlayer({
             total={total}
           />
         </div>
+
       </div>
+      {/* <iframe width="100%" height="52" src="https://odesli.co/embed/?url=https%3A%2F%2Fsong.link%2Fs%2F0Jcij1eWd5bDMU5iPbxe2i&theme=light" frameborder="0" allowfullscreen sandbox="allow-same-origin allow-scripts allow-presentation allow-popups allow-popups-to-escape-sandbox" allow="clipboard-read; clipboard-write"></iframe> */}
     </div>
   );
 }
