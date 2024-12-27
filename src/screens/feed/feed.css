@@ -1,0 +1,170 @@
+*{
+    box-sizing: border-box;
+    margin:0;
+}
+
+.component {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .card {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    background-color: rgba(255, 255, 255, 0.733);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .header {
+    display: flex;
+    padding: 20px;
+    border-bottom: 1px solid #e0e0e0;
+    height: 15vh;
+  }
+  
+  .avatar {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  
+  .info {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+  }
+  
+  .status {
+    font-size: 12px;
+    color: #6b7280;
+  }
+  
+  .song {
+    font-size: 20px;
+    color: #ef4444;
+    font-weight: 600;
+  }
+  
+  .artist {
+    font-size: 12px;
+    color: #9ca3af;
+  }
+  
+  .icons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  
+  .icon {
+    width: 20px;
+    cursor: pointer;
+  }
+  
+  .controls {
+    display: flex;
+    padding: 20px;
+    align-items: center;
+    gap:3%;
+    justify-content: center;
+    height:10vh;
+  }
+  
+  .buttons {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .progress {
+    flex-grow: 1;
+    margin: 0 20px;
+    position: relative;
+  }
+  
+  .background {
+    background-color: #f3f4f64d;
+    height: 4px;
+    border-radius: 2px;
+  }
+  
+  .foreground {
+    background-color: #ef4444;
+    height: 4px;
+    width: 50%;
+    position: absolute;
+    top: 0;
+    border-radius: 2px;
+  }
+  
+  .time {
+    font-size: 12px;
+    color: #6b7280;
+  }
+  
+  .playlist {
+    padding: 20px;
+    height: 75vh;
+    padding-top:0;
+    overflow-y: auto;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+  .playlist-header{
+    font-size: 40px;
+    position: sticky;
+    top: 0px;
+    background-color: rgb(42, 175, 199);
+    color:white;
+    padding:2%;
+  }
+  
+  .playlist-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .filter-icon {
+    width: 20px;
+    cursor: pointer;
+  }
+  
+  .playlist-item {
+    display: flex;
+    padding: 15px 0;
+    cursor: pointer;
+    border-bottom: 1px solid #e0e0e0;
+    transition: background 0.3s;
+  }
+  
+  .playlist-item:hover {
+    background-color: #f3f4f6;
+  }
+  
+  .playlist-avatar {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  
+  .playlist-info {
+    margin-left: 15px;
+  }
+  
+  .playlist-info .song {
+    font-size: 14px;
+    color: #ef4444;
+    font-weight: 600;
+  }
+  
+  .playlist-info .artist {
+    font-size: 12px;
+    color: #9ca3af;
+  }
+  

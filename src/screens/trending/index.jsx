@@ -7,14 +7,14 @@ import { ImNext } from "react-icons/im";
 // import myAudioFiles from '../../songs';
 import './trending.css'
 const audioFiles = require.context("../../songs",false,/\.(mp3|wav|ogg)$/)
-console.log(audioFiles)
+// console.log(audioFiles)
 
 const songs= audioFiles.keys().map((fileName)=>({
     name: fileName.replace('./',''),
     path: audioFiles(fileName),
 }));
 
-console.log(songs.length);
+// console.log(songs.length);
 function Trending() {
     const [currentSongIndex,setCurrentSongIndex]=useState(0);
     // console.log("songs",songs);
@@ -27,6 +27,10 @@ function Trending() {
     const handleSongClick = (index)=>{
         setCurrentSongIndex(index)
     }
+
+    const handleSongEnd =()=>{
+        handleNext();
+    };
     return (
         <div className='screen-container'>
             <div className='div-container '>
@@ -111,11 +115,14 @@ function Trending() {
                     <button onClick={handlePrev} disabled={songs.length<=1}><ImPrevious />
                     </button>
 
+                    <div className='audio-player-container'>
                     <ReactAudioPlayer
                                 src={songs[currentSongIndex].path}
                                 autoPlay
                                 controls
+                                onEnded={handleNext} disabled={songs.length<=1}
                                 />
+                    </div>
                     <button onClick={handleNext} disabled= {songs.legth<=1}> <ImNext /></button>
                     
                     
