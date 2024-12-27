@@ -1,8 +1,10 @@
-import React, { useState } from "react";
-import ReactAudioPlayer from 'react-audio-player';
+import React, { useState, useEffect } from "react";
+import ReactAudioPlayer from "react-audio-player";
 import { ImPrevious } from "react-icons/im";
 import { ImNext } from "react-icons/im";
 import "./feed.css";
+import apiClient from "../../spotify";
+
 const audioFiles = require.context("../../songs", false, /\.(mp3|wav|ogg)$/);
 // console.log(audioFiles)
 
@@ -12,7 +14,16 @@ const songs = audioFiles.keys().map((fileName) => ({
 }));
 function Feed() {
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
-  // console.log("songs",songs);
+  const [playlists, setPlaylists] = useState(null);
+
+  useEffect(() => {
+    const songname = encodeURIComponent(currentSongIndex);
+    apiClient.get(`/search?q=${songname}&type=album`).then(function (response) {
+      setPlaylists(response.data.albums);
+    //   console.log("res",response);
+    });
+  }, [currentSongIndex, songs]);
+  
   const handleNext = () => {
     setCurrentSongIndex((prevIndex) => (prevIndex + 1) % songs.length);
   };
@@ -35,15 +46,14 @@ function Feed() {
           <div className="header">
             <img
               className="avatar"
-              src="https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?auto=format&fit=crop&w=200&q=200"
+              src={playlists?.items[0]?.images[0]?.url}
               alt="User avatar"
             />
+            
             <div className="info">
               <span className="status">now playing</span>
-              <span className="song">
-                {songs[currentSongIndex].name}
-              </span>
-              <span className="artist">-"Boston," Augustana</span>
+              <span className="song">{songs[currentSongIndex].name}</span>
+              <span className="artist">-{playlists?.items[0]?.artists[0].name}</span>
               <div className="icons">
                 <img
                   className="icon"
@@ -60,49 +70,56 @@ function Feed() {
               </div>
             </div>
           </div>
-          <div className='controls'>
-                    <button onClick={handlePrev} disabled={songs.length<=1}><ImPrevious />
-                    </button>
+          <div className="controls">
+            <button onClick={handlePrev} disabled={songs.length <= 1}>
+              <ImPrevious />
+            </button>
 
-                    <div className='audio-player-container'>
-                    <ReactAudioPlayer
-                                src={songs[currentSongIndex].path}
-                                autoPlay
-                                controls
-                                onEnded={handleNext} disabled={songs.length<=1}
-                                />
-                    </div>
-                    <button onClick={handleNext} disabled= {songs.legth<=1}> <ImNext /></button>
-                    
-                    
-                </div>
+            <div className="audio-player-container">
+              <ReactAudioPlayer
+                src={songs[currentSongIndex].path}
+                autoPlay
+                controls
+                onEnded={handleNext}
+                disabled={songs.length <= 1}
+              />
+            </div>
+            <button onClick={handleNext} disabled={songs.legth <= 1}>
+              {" "}
+              <ImNext />
+            </button>
+          </div>
           <div className="playlist">
             <div className="playlist-header">
-              <span >Play List</span>
+              <span>Play List</span>
               <img
                 className="filter-icon"
                 src="https://p.kindpng.com/picc/s/152-1529312_filter-ios-filter-icon-png-transparent-png.png"
               />
             </div>
             {/*  */}
-            {songs.map((song,index)=>(
-                    <div className="playlist-item">
-                    <img
-                        className="playlist-avatar"
-                        src="https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?auto=format&fit=crop&w=200&q=200"
-                        alt="User avatar"
-                    />
-                    <div className="playlist-info">
-                    <span className='song' onClick={()=>handleSongClick(index) }     style={{
-                            cursor: 'pointer',
-                            margin: '10px 5px',
-                            color: currentSongIndex === index ? 'green' : 'blue',
-                        }}>
-                            {song.name}
-                        </span>
-                        <span className="artist">-"Boston," Augustana</span>
-                    </div>
-                    </div>
+            {songs.map((song, index) => (
+              <div className="playlist-item" key={index} onClick={() => handleSongClick(index)}
+              >
+                <img
+                  className="playlist-avatar"
+                  src="https://saiedmusic.com/wp-content/uploads/2022/09/music-rainbow.jpg"
+                  alt="User avatar"
+                />
+                <div className="playlist-info">
+                  <span
+                    className="song"
+                    style={{
+                cursor: "pointer",
+                margin: "10px 5px",
+                color: currentSongIndex === index ? "green" : "blue",
+              }}
+                  >
+                    {song.name}
+                  </span>
+                  <span className="artist">-</span>
+                </div>
+              </div>
             ))}
             {/* <!-- Repeat for other playlist items --> */}
           </div>
@@ -114,16 +131,4 @@ function Feed() {
 
 export default Feed;
 
-// {songs.map((song,index)=>(
-                    
-//     <span className='song' onClick={()=>handleSongClick(index) }     style={{
-//         cursor: 'pointer',
-//         margin: '10px 5px',
-//         color: currentSongIndex === index ? 'green' : 'blue',
-//     }}>
-//         {song.name}
-//     </span>
-    
 
-
-// ))}
