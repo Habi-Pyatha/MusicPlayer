@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route,useNavigate } from "react-router-dom";
 import Sidebar from "../../components/sidebar";
 import { setClientToken } from "../../spotify";
 import Login from "../auth/login";
@@ -12,7 +12,7 @@ import "./home.css";
 
 export default function Home() {
   const [token, setToken] = useState("");
-
+  // const navigate = useNavigate();
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     const expirationTime = window.localStorage.getItem("tokenExpiration");
@@ -41,12 +41,20 @@ export default function Home() {
     }
   }, []);
 
+  // const logout=()=>{
+  //   console.log("clicked")
+  //   window.localStorage.removeItem("token");
+  //   window.localStorage.removeItem("tokenExpiration");
+  //   setToken(null); // Force redirect to Login
+  //   // window.location.reload(); // Reload the page to clear the token and force login again.
+  //   navigate("/login")
+  // }
   return !token ? (
     <Login />
   ) : (
     <Router>
       <div className="main-body">
-        <Sidebar />
+        <Sidebar  />
         <Routes>
           <Route path="/" element={<Library />} />
           <Route path="/feed" element={<Feed />} />
