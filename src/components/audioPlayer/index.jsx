@@ -70,7 +70,7 @@ export default function AudioPlayer({
         audioRef.current.pause();
       }
     }
-  }, [isPlaying]);
+  }, [isPlaying,audioSrc, startTimer]);
 
   useEffect(() => {
     audioRef.current.pause();
